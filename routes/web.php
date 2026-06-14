@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatbotController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -9,6 +10,11 @@ Route::inertia('/', 'welcome', [
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
+});
+
+Route::controller(ChatbotController::class)->group(function () {
+    Route::get('/chatbot', 'index')->name('chatbot');
+    Route::post('/chatbot/store', 'store')->name('chatbot.store');
 });
 
 require __DIR__.'/settings.php';
