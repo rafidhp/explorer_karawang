@@ -12,7 +12,7 @@ const STATS = [
 
 export default function HeroSection() {
     return (
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 md:gap-32 lg:gap-64 mt-8 w-full min-h-[75vh]">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 md:gap-32 lg:gap-64 mt-8 w-full min-h-[80vh]">
 
             {/* left section */}
             <div className="flex flex-col gap-6 md:gap-8 flex-1 w-full">

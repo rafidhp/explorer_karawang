@@ -19,12 +19,12 @@ export default function MessageSection() {
     const bottomRef = useRef<HTMLDivElement | null>(null);
 
     const suggestions = [
-        "Bagaimana cara mendaftar menjadi UMKM?",
-        "Apa itu Stay Point?",
-        "Bagaimana cara menambahkan produk?",
-        "Apa itu Komunitas yang ada di Khaslana?",
-        "Bagaimana cara mengaktifkan status mangkal?",
-        "Bagaimana cara mengunggah foto toko?",
+        // "Bagaimana cara mendaftar menjadi UMKM?",
+        "Apa itu Explore Karawang?",
+        // "Bagaimana cara menambahkan produk?",
+        // "Apa itu Komunitas yang ada di Khaslana?",
+        // "Bagaimana cara mengaktifkan status mangkal?",
+        // "Bagaimana cara mengunggah foto toko?",
     ];
 
     useEffect(() => {
@@ -89,7 +89,7 @@ export default function MessageSection() {
     };
     
     return (
-        <div className="flex flex-col w-full mx-auto min-h-[80vh]">
+        <div className="flex flex-col w-full mx-auto min-h-[90vh]">
             {messages.length === 0 ? (
                 <div className="flex flex-1 flex-col items-center justify-center">
                     {!loading ? (
@@ -101,10 +101,10 @@ export default function MessageSection() {
                                 />
                             </div>
                             <h1 className="text-center text-4xl font-bold">
-                                Asisten UMKM
+                                Asisten Karavan
                             </h1>
                             <p className="mt-3max-w-xl text-center text-zinc-400">
-                                Tanyakan apa saja tentang penggunaan aplikasi, Stay Point, produk, lokasi UMKM, dan fitur lainnya.
+                                Tanyakan apa saja tentang penggunaan aplikasi Explore Karawang atau fitur lainnya.
                             </p>
                             <div className="mt-10 flex flex-wrap justify-center gap-3">
                                 {suggestions.map(

@@ -47,7 +47,7 @@ class ChatbotController extends Controller
     private function systemPrompt(): string {
         return <<<PROMPT
             Kamu adalah Karachat asisten dari Explore Karawang yang bisa membantu pengguna untuk menjawab seputar pertanyaan tentang
-            website Explore Karawang dan juga tempat-tempat menarik yang ada di Karawang
+            website Explore Karawang dan juga tempat-tempat menarik yang ada di Karawang.
         PROMPT; 
     }
 }

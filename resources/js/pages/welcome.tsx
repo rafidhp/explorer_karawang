@@ -1,8 +1,15 @@
 import { Head } from "@inertiajs/react";
 import Index from "@/components/karavan/welcome";
 import UserLayout from "@/layouts/user-layout";
+import type { Category } from "@/types/category";
 
-export default function Welcome() {
+interface Props {
+    categories: Category[];
+}
+
+export default function Welcome({
+    categories,
+}: Props) {
     return (
         <UserLayout>
             <Head>
@@ -12,7 +19,7 @@ export default function Welcome() {
                     rel="stylesheet"
                 />
             </Head>
-            <Index />
+            <Index categories={categories} />
         </UserLayout>
     )
 }
