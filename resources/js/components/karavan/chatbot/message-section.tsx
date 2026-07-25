@@ -20,7 +20,7 @@ export default function MessageSection() {
 
     const suggestions = [
         // "Bagaimana cara mendaftar menjadi UMKM?",
-        "Apa itu Explore Karawang?",
+        "Apa itu Karaventure?",
         // "Bagaimana cara menambahkan produk?",
         // "Apa itu Komunitas yang ada di Khaslana?",
         // "Bagaimana cara mengaktifkan status mangkal?",
@@ -149,7 +149,7 @@ export default function MessageSection() {
                                             {item.question}
                                         </h2>
                                     </div>
-                                    <div className="border-l-2 border-[#99FF33] pl-5">
+                                    <div className="border-l-2 border-amber-300 pl-5">
                                         <p className="mb-4 text-xs uppercase tracking-wider text-zinc-500">
                                             Jawaban
                                         </p>

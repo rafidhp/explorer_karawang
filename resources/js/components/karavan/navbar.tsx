@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/react";
 import { MapPin, Search, Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
-import { home } from "@/routes";
+import { home, about, explore } from "@/routes";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +12,10 @@ export default function Navbar() {
             name: "Beranda", href: home().url,
         },
         {
-            name: "Eksplorasi", href: home().url,
+            name: "Eksplorasi", href: explore().url,
+        },
+        {
+            name: "Tentang Kami", href: about().url,
         },
     ]
 
@@ -61,10 +64,10 @@ export default function Navbar() {
                         ? `
                             py-6
                             md:px-8.5
-                            translate-y-[15px] scale-[0.92]
+                            translate-y-3.75 scale-[0.92]
                             bg-[rgba(30,27,38,0.75)]
                             backdrop-blur-[14px]
-                            border border-white/[0.2]
+                            border border-white/20
                             shadow-[0_10px_30px_rgba(0,0,0,0.25)]
                         `
                         : "translate-y-0 scale-100"
@@ -87,13 +90,13 @@ export default function Navbar() {
                                 group-hover:-translate-y-0.5
                             "
                         />
-                        <span className="font-medium text-xl md:text-2xl transition-all duration-500 ease-out group-hover:tracking-wide group-hover:-translate-y-[1px]">
-                            Explore <span className="text-amber-300 transition-all duration-500 group-hover:text-amber-200 group-hover:drop-shadow-[0_0_12px_rgba(252,211,77,0.8)]">Karawang</span>
+                        <span className="font-medium text-xl md:text-2xl transition-all duration-500 ease-out group-hover:tracking-wide group-hover:-translate-y-px">
+                            Karaven<span className="text-amber-300 transition-all duration-500 group-hover:text-amber-200 group-hover:drop-shadow-[0_0_12px_rgba(252,211,77,0.8)]">ture</span>
                         </span>
                         <span
                             className="
                                 absolute -bottom-1 left-0
-                                h-[2px] w-0
+                                h-0.5 w-0
                                 bg-amber-300
 
                                 transition-all duration-500
@@ -120,7 +123,7 @@ export default function Navbar() {
                                         <span
                                             className="
                                                 block absolute bottom-0 left-0
-                                                h-[2px] w-0 bg-amber-300
+                                                h-0.5 w-0 bg-amber-300
                                                 transition-[width] duration-300
                                                 group-hover:w-full
                                             "
@@ -135,7 +138,7 @@ export default function Navbar() {
                                     border border-white/20
                                     rounded-full
                                     ps-4
-                                    bg-white/[0.03]
+                                    bg-white/3
                                     backdrop-blur-[14px]
                                     transition-all duration-300
                                     hover:border-amber-300/60

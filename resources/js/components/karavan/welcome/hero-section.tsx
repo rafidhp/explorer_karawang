@@ -1,7 +1,8 @@
 import { Link } from "@inertiajs/react";
 import { motion } from 'framer-motion';
-import { Sparkles, ChevronRight, TrendingUp } from "lucide-react"
-import HeroImage from "@/assets/kampung-turis.jpg";
+import { Sparkles, ChevronRight, TrendingUp } from "lucide-react";
+import HeroImage from "@/assets/kp-roblox.png";
+import { explore } from "@/routes";
 
 const STATS = [
   { value: "120+", label: "Tempat menarik" },
@@ -43,7 +44,7 @@ export default function HeroSection() {
                 </div>
                 <div className="flex justify-center lg:justify-start mt-8 gap-4 md:gap-8">
                     <Link
-                        href="#"
+                        href={explore()}
                         className="
                             group
                             flex items-center justify-center gap-2
@@ -60,7 +61,7 @@ export default function HeroSection() {
                         <ChevronRight className="pt-0.5 h-5 w-5 group-hover:translate-x-1 transition-all duration-200" />
                     </Link>
                     <Link
-                        href="#"
+                        href={explore()}
                         className="
                             flex items-center justify-center gap-2
                             text-base md:text-lg
@@ -105,7 +106,7 @@ export default function HeroSection() {
                     <img
                         src={HeroImage}
                         alt="Hero Image"
-                        className="w-full max-w-full sm:max-w-full md:max-w-[600px] lg:max-w-[550px] lg:min-w-80 xl:max-w-[600px] border-3 border-amber-300/80 rounded-3xl"
+                        className="min-h-130 w-full max-w-full sm:max-w-full md:max-w-150 lg:max-w-137.5 lg:min-w-80 xl:max-w-150 border-2 border-amber-300/60 rounded-3xl object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent" />
                 </div>

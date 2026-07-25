@@ -1,15 +1,21 @@
 <?php
 
 use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use Inertia\Inertia;
 
 // Route::inertia('/', 'welcome', [
 //     'canRegister' => Features::enabled(Features::registration()),
 // ])->name('home');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/about', function() {
+    return Inertia::render('about');
+})->name('about');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
@@ -18,6 +24,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::controller(ChatbotController::class)->group(function () {
     Route::get('/chatbot', 'index')->name('chatbot');
     Route::post('/chatbot/store', 'store')->name('chatbot.store');
+});
+
+Route::controller(ExploreController::class)->group(function() {
+    Route::get('/explore', 'index')->name('explore');
 });
 
 require __DIR__.'/settings.php';

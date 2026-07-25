@@ -37,8 +37,8 @@ class CategorySeeder extends Seeder
             ],
         ];
 
-        foreach($categories as $value => $key) {
-            Category::create($key);
+        foreach($categories as $value) {
+            Category::create($value);
         }
     }
 }

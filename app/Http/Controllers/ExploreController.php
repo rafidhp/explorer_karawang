@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Place\Place;
-use Laravel\Fortify\Features;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-
-class HomeController extends Controller
+class ExploreController extends Controller
 {
     public function index() {
         $places = Place::with([
@@ -19,12 +17,9 @@ class HomeController extends Controller
         ])
         ->latest()
         ->get();
-        $categories = Category::all();
 
-        return Inertia::render('welcome', [
-            'canRegister' => Features::enabled(Features::registration()),
+        return Inertia::render('explore', [
             'places' => $places,
-            'categories' => $categories,
         ]);
     }
 }
