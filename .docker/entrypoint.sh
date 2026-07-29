@@ -74,7 +74,7 @@ if [ ! -f /var/www/html/storage/.seeded ]; then
 fi
 
 # Optimize
-php artisan optimize --force
+php artisan optimize
 
 echo "Application is ready!"
 
