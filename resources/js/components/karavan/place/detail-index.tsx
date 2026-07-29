@@ -33,7 +33,7 @@ export default function DetailIndex({
                 <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-black/30 h-full" />
                 <div className="absolute bottom-12 flex flex-col gap-2 px-6 md:px-10 lg:px-17.5">
                     <div className="flex items-center gap-2">
-                        <div className="px-4 py-2 bg-black/70 border border-white/10 rounded-full text-sm h-10 flex items-center">
+                        <div className="px-4 py-2 bg-black/70 border border-white/20 rounded-full text-sm h-10 flex items-center">
                             {place.category.name}
                         </div>
                         {place.is_trending && (
@@ -89,6 +89,15 @@ export default function DetailIndex({
                     >
                         <h2 className="text-xl md:text-3xl font-semibold">Tentang Tempat Ini</h2>
                         <p className="text-muted-foreground text-base">{place.description}</p>
+                        {place.tags.length != 0 && (
+                            <div className="flex items-center gap-4 mt-8">
+                                {place.tags.map((tag) => (
+                                    <div className="rounded-full px-4 py-1 bg-gray-900 border border-white/20 cursor-default">
+                                        {tag}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                     {place.place_images.length != 0 && (
                         <div className="flex flex-col gap-4 mt-8">
