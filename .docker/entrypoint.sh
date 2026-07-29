@@ -89,10 +89,6 @@ php artisan view:clear || true
 
 # Seed essential data on first run only (permissions, roles, superadmin)
 if [ ! -f /var/www/html/storage/.seeded ]; then
-    echo "First run detected. Seeding essential data..."
-    php artisan db:seed --class=PermissionsFromRoutesSeeder --force
-    php artisan db:seed --class=RoleSeeder --force
-
     # Create superadmin user via tinker
     php artisan tinker --execute="
         \$user = \\App\\Models\\User::firstOrCreate(
