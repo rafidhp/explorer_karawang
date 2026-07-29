@@ -56,7 +56,7 @@ RUN apk add --no-cache --virtual .build-deps \
     freetype-dev \
     libzip-dev \
     oniguruma-dev
-    
+
 # RUN apk add --no-cache \
 #     nginx \
 #     sqlite \
@@ -126,6 +126,13 @@ COPY .docker/supervisor.conf /etc/supervisor.d/app.ini
 COPY .docker/php.ini /usr/local/etc/php/conf.d/custom.ini
 COPY .docker/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY .docker/entrypoint.sh /entrypoint.sh
+
+RUN mkdir -p \
+    /var/www/html/storage/framework/cache/data \
+    /var/www/html/storage/framework/sessions \
+    /var/www/html/storage/framework/views \
+    /var/www/html/storage/logs \
+    /var/www/html/bootstrap/cache
 
 # Set permissions
 RUN chmod +x /entrypoint.sh \
