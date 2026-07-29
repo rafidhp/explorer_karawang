@@ -11,7 +11,7 @@ WORKDIR /app
 # Copy composer files and install PHP dependencies first (for artisan commands)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+RUN composer install --no-dev --no-autoloader --prefer-dist
 
 # Copy package files and install npm dependencies
 COPY package*.json ./
@@ -22,6 +22,8 @@ COPY . .
 
 # Finish composer setup
 RUN composer dump-autoload --optimize
+RUN php artisan list
+RUN php artisan wayfinder:generate --with-form
 
 # Build assets
 RUN npm run build
