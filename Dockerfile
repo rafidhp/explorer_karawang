@@ -33,6 +33,8 @@ FROM php:8.4-fpm-alpine AS production
 # Install system dependencies
 RUN apk add --no-cache \
     nginx \
+    sqlite \
+    sqlite-dev \
     supervisor \
     libpng-dev \
     libjpeg-turbo-dev \
@@ -45,7 +47,7 @@ RUN apk add --no-cache \
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install \
-    pdo_mysql \
+    pdo_sqlite \
     gd \
     mbstring \
     zip \
@@ -82,9 +84,9 @@ RUN chmod +x /entrypoint.sh \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Ensure database directory exists and is writable
-# RUN mkdir -p /var/www/html/database \
-#     && chown -R www-data:www-data /var/www/html/database \
-#     && chmod -R 775 /var/www/html/database
+RUN mkdir -p /var/www/html/database \
+    && chown -R www-data:www-data /var/www/html/database \
+    && chmod -R 775 /var/www/html/database
 
 EXPOSE 80
 
