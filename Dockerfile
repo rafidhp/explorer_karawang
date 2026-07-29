@@ -57,55 +57,6 @@ RUN apk add --no-cache --virtual .build-deps \
     libzip-dev \
     oniguruma-dev
 
-# RUN apk add --no-cache \
-#     nginx \
-#     sqlite \
-#     supervisor \
-#     curl \
-#     bash \
-#     && apk add --no-cache --virtual .build-deps \
-#         sqlite-dev \
-#         libpng-dev \
-#         libjpeg-turbo-dev \
-#         freetype-dev \
-#         libzip-dev \
-#         oniguruma-dev \
-#     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-#     && docker-php-ext-install \
-#         pdo_sqlite \
-#         gd \
-#         mbstring \
-#         zip \
-#         bcmath \
-#         opcache \
-#     && apk del .build-deps
-
-# RUN apk add --no-cache \
-#     nginx \
-#     sqlite \
-#     sqlite-dev \
-#     supervisor \
-#     libpng-dev \
-#     libjpeg-turbo-dev \
-#     freetype-dev \
-#     libzip-dev \
-#     oniguruma-dev \
-#     curl \
-#     bash
-
-# Install PHP extensions
-# RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-#     && docker-php-ext-install \
-#     pdo_sqlite \
-#     gd \
-#     mbstring \
-#     zip \
-#     bcmath \
-#     opcache
-
-# Install Composer
-# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 WORKDIR /var/www/html
 
 # Copy application files
