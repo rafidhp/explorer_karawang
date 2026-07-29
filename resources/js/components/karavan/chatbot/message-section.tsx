@@ -19,7 +19,7 @@ export default function MessageSection() {
     const bottomRef = useRef<HTMLDivElement | null>(null);
 
     const suggestions = [
-        // "Bagaimana cara mendaftar menjadi UMKM?",
+        "Tempat buat ngerjain tugas yang enak?",
         "Apa itu Karaventure?",
         // "Bagaimana cara menambahkan produk?",
         // "Apa itu Komunitas yang ada di Khaslana?",

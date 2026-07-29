@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PlaceController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Inertia\Inertia;
@@ -28,6 +29,10 @@ Route::controller(ChatbotController::class)->group(function () {
 
 Route::controller(ExploreController::class)->group(function() {
     Route::get('/explore', 'index')->name('explore');
+});
+
+Route::controller(PlaceController::class)->group(function () {
+    Route::get('/place/{place}', 'detail')->name('place');
 });
 
 require __DIR__.'/settings.php';

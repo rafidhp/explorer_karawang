@@ -1,4 +1,6 @@
+import { router } from "@inertiajs/react";
 import { Star, ChevronRight, Gem } from "lucide-react";
+import { place as placeDetail } from "@/routes";
 import type { Place } from "@/types/place";
 
 interface CardProps {
@@ -6,11 +8,16 @@ interface CardProps {
     isExplorePage?: boolean | null;
 }
 
+const handleCardClicked = (place: Place) => {
+    router.visit(placeDetail(place.id));
+}
+
 function HeroCard({ place }: CardProps) {
     const isHiddenGem = place.category.name === 'Hidden-Gems';
 
     return (
         <article
+            onClick={() => handleCardClicked(place)}
             className="
                 group box-content relative
                 space-y-5 border border-amber-300/20
@@ -74,6 +81,7 @@ function SmallCard({
 
     return (
         <article
+            onClick={() => handleCardClicked(place)}
             className="
                 group box-content relative
                 space-y-3 border border-amber-300/20
