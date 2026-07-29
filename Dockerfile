@@ -3,8 +3,8 @@ FROM php:8.4-cli-alpine AS frontend-builder
 
 # Install Node.js, npm, and PHP extension dependencies
 RUN apk add --no-cache nodejs npm \
-    libpng-dev libjpeg-turbo-dev freetype-dev libzip-dev oniguruma-dev icu-dev libxml2-dev \
-    && docker-php-ext-install zip mbstring intl pdo pdo_mysql
+    sqlite-dev libzip-dev oniguruma-dev icu-dev libxml2-dev \
+    && docker-php-ext-install zip mbstring intl pdo pdo_sqlite
 
 WORKDIR /app
 
@@ -34,23 +34,47 @@ RUN apk add --no-cache \
     nginx \
     sqlite \
     supervisor \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    freetype-dev \
-    libzip-dev \
-    oniguruma-dev \
     curl \
-    bash
+    bash \
+    && apk add --no-cache --virtual .build-deps \
+        sqlite-dev \
+        libpng-dev \
+        libjpeg-turbo-dev \
+        freetype-dev \
+        libzip-dev \
+        oniguruma-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install \
+        pdo_sqlite \
+        gd \
+        mbstring \
+        zip \
+        bcmath \
+        opcache \
+    && apk del .build-deps
+
+# RUN apk add --no-cache \
+#     nginx \
+#     sqlite \
+#     sqlite-dev \
+#     supervisor \
+#     libpng-dev \
+#     libjpeg-turbo-dev \
+#     freetype-dev \
+#     libzip-dev \
+#     oniguruma-dev \
+#     curl \
+#     bash
 
 # Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-    pdo_sqlite \
-    gd \
-    mbstring \
-    zip \
-    bcmath \
-    opcache
+# RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+#     && docker-php-ext-install \
+#     pdo_sqlite \
+#     gd \
+#     mbstring \
+#     zip \
+#     bcmath \
+#     opcache
 
 # Install Composer
 # COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
