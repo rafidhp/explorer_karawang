@@ -87,16 +87,9 @@ php artisan cache:clear || true
 php artisan route:clear || true
 php artisan view:clear || true
 
-# Seed essential data on first run only (permissions, roles, superadmin)
+# Seed essential data on first run only
 if [ ! -f /var/www/html/storage/.seeded ]; then
-    # Create superadmin user via tinker
-    php artisan tinker --execute="
-        \$user = \\App\\Models\\User::firstOrCreate(
-            ['email' => 'superadmin@karaventure.com'],
-            ['name' => 'Super Admin', 'password' => bcrypt('password'), 'email_verified_at' => now()]
-        );
-        echo 'Superadmin user created/verified.';
-    "
+    php artisan db:seed
 
     touch /var/www/html/storage/.seeded
     echo "Essential data seeded successfully!"
