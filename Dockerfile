@@ -22,6 +22,12 @@ COPY . .
 
 # Finish composer setup
 RUN composer dump-autoload --optimize
+RUN mkdir -p \
+    storage/framework/cache/data \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    bootstrap/cache
 RUN php artisan list
 RUN php artisan wayfinder:generate --with-form
 
