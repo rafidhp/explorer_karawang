@@ -79,13 +79,13 @@ sqlite3 /var/www/html/database/database.sqlite "PRAGMA busy_timeout=30000;"
 
 echo "⚙️ Running Laravel setup..."
 
+# Run migrations
+php artisan migrate --force
+
 php artisan config:clear || true
 php artisan cache:clear || true
 php artisan route:clear || true
 php artisan view:clear || true
-
-# Run migrations
-php artisan migrate --force
 
 # Seed essential data on first run only (permissions, roles, superadmin)
 if [ ! -f /var/www/html/storage/.seeded ]; then

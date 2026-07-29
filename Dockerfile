@@ -44,22 +44,41 @@ RUN apk add --no-cache \
     supervisor \
     curl \
     bash \
-    && apk add --no-cache --virtual .build-deps \
-        sqlite-dev \
-        libpng-dev \
-        libjpeg-turbo-dev \
-        freetype-dev \
-        libzip-dev \
-        oniguruma-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        pdo_sqlite \
-        gd \
-        mbstring \
-        zip \
-        bcmath \
-        opcache \
-    && apk del .build-deps
+    libpng \
+    libjpeg-turbo \
+    freetype \
+    libzip
+
+RUN apk add --no-cache --virtual .build-deps \
+    sqlite-dev \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    libzip-dev \
+    oniguruma-dev
+    
+# RUN apk add --no-cache \
+#     nginx \
+#     sqlite \
+#     supervisor \
+#     curl \
+#     bash \
+#     && apk add --no-cache --virtual .build-deps \
+#         sqlite-dev \
+#         libpng-dev \
+#         libjpeg-turbo-dev \
+#         freetype-dev \
+#         libzip-dev \
+#         oniguruma-dev \
+#     && docker-php-ext-configure gd --with-freetype --with-jpeg \
+#     && docker-php-ext-install \
+#         pdo_sqlite \
+#         gd \
+#         mbstring \
+#         zip \
+#         bcmath \
+#         opcache \
+#     && apk del .build-deps
 
 # RUN apk add --no-cache \
 #     nginx \
