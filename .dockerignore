@@ -1,0 +1,16 @@
+# Build artifacts
+/public/build/
+
+# Docker data volumes
+/data/
+
+.git
+.github
+node_modules
+vendor
+storage/logs
+storage/framework
+tests
+.env
+.env.*
+docker-compose.yml

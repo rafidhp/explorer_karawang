@@ -84,12 +84,6 @@ php artisan cache:clear || true
 php artisan route:clear || true
 php artisan view:clear || true
 
-
-# Optimize caches
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-
 # Run migrations
 php artisan migrate --force
 

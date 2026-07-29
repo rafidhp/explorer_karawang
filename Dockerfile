@@ -4,8 +4,7 @@ FROM php:8.4-cli-alpine AS frontend-builder
 # Install Node.js, npm, and PHP extension dependencies
 RUN apk add --no-cache nodejs npm \
     libpng-dev libjpeg-turbo-dev freetype-dev libzip-dev oniguruma-dev icu-dev libxml2-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd zip mbstring bcmath intl pdo pdo_mysql fileinfo xml
+    && docker-php-ext-install zip mbstring intl pdo pdo_mysql
 
 WORKDIR /app
 
@@ -34,7 +33,6 @@ FROM php:8.4-fpm-alpine AS production
 RUN apk add --no-cache \
     nginx \
     sqlite \
-    sqlite-dev \
     supervisor \
     libpng-dev \
     libjpeg-turbo-dev \
@@ -55,7 +53,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     opcache
 
 # Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
@@ -69,7 +67,7 @@ COPY --from=frontend-builder --chown=www-data:www-data /app/public/build ./publi
 RUN rm -rf node_modules tests .git .github .docs
 
 # Install production dependencies only
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+COPY --from=frontend-builder /app/vendor ./vendor
 
 # Copy Docker configuration files
 COPY .docker/nginx.conf /etc/nginx/http.d/default.conf
