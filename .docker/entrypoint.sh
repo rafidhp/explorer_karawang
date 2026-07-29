@@ -95,7 +95,6 @@ if [ ! -f /var/www/html/storage/.seeded ]; then
             ['email' => 'superadmin@karaventure.com'],
             ['name' => 'Super Admin', 'password' => bcrypt('password'), 'email_verified_at' => now()]
         );
-        \$user->assignRole('superadmin');
         echo 'Superadmin user created/verified.';
     "
 

@@ -28,7 +28,7 @@ RUN mkdir -p \
     storage/framework/views \
     storage/logs \
     bootstrap/cache
-RUN php artisan list
+    
 RUN php artisan wayfinder:generate --with-form
 
 # Build assets
