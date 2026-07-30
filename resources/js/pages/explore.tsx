@@ -7,11 +7,15 @@ import type { Place } from "@/types/place";
 interface ExploreProps {
     places: Place[];
     categories: Category[];
+    selectedCategory: number | null;
+    showTrending: boolean;
 }
 
 export default function About({
     places,
     categories,
+    selectedCategory,
+    showTrending,
 }: ExploreProps) {
     return (
         <UserLayout>
@@ -25,6 +29,8 @@ export default function About({
             <ExploreIndex
                 places={places}
                 categories={categories}
+                selectedCategory={selectedCategory}
+                showTrending={showTrending}
             />
         </UserLayout>
     )

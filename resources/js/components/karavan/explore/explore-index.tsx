@@ -8,14 +8,21 @@ import type { Place } from "@/types/place";
 interface ExploreIndexProps {
     places: Place[];
     categories: Category[];
+    selectedCategory: number | null;
+    showTrending: boolean;
 }
 
 export default function ExploreIndex({
     places,
     categories,
+    selectedCategory: initialSelectedCategory,
+    showTrending: initialTrending,
 }: ExploreIndexProps) {
     const [search, setSearch] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(
+        initialSelectedCategory
+    );
+    const [showTrending, setShowTrending] = useState(initialTrending);
 
     const filteredPlaces: Place[] = useMemo(() => {
         return places.filter((place) => {
@@ -23,10 +30,12 @@ export default function ExploreIndex({
                 selectedCategory === null ||
                 place.category_id === selectedCategory;
 
+            const matchTrending = !showTrending || place.is_trending;
+
             const keyword = search.trim().toLowerCase();
 
             if (!keyword) {
-                return matchCategory;
+                return matchCategory && matchTrending;
             }
 
             const searchable = [
@@ -42,9 +51,13 @@ export default function ExploreIndex({
                 .join(" ")
                 .toLowerCase();
 
-            return matchCategory && searchable.includes(keyword);
+            return (
+                matchCategory &&
+                matchTrending &&
+                searchable.includes(keyword)
+            );
         });
-    }, [places, search, selectedCategory]);
+    }, [places, search, selectedCategory, showTrending]);
 
     return (
         <div className="mb-16">
@@ -55,6 +68,8 @@ export default function ExploreIndex({
                 onSearchChange={setSearch}
                 selectedCategory={selectedCategory}
                 onCategoryChange={setSelectedCategory}
+                showTrending={showTrending}
+                onTrendingChange={setShowTrending}
             />
             <PlaceSection places={filteredPlaces} />
             <ThreeDBackground />

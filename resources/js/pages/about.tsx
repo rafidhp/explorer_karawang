@@ -1,5 +1,6 @@
 import { Head } from "@inertiajs/react";
 import AboutIndex from "@/components/karavan/about/about-index";
+import ThreeDBackground from "@/components/karavan/welcome/3d-background";
 import UserLayout from "@/layouts/user-layout"
 
 export default function About() {
@@ -13,6 +14,7 @@ export default function About() {
                 />
             </Head>
             <AboutIndex />
+            <ThreeDBackground />
         </UserLayout>
     )
 }

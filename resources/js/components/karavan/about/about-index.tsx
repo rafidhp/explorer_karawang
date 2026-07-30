@@ -1,5 +1,9 @@
+import DevPage from "@/components/dev-page";
+
 export default function AboutIndex() {
     return (
-        <div>test</div>
-    )
+        <div className="h-[85vh] flex items-center justify-center">
+            <DevPage />
+        </div>
+    );
 }

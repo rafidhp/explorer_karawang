@@ -2,13 +2,14 @@ import {
     Search,
     SlidersHorizontal,
     MapPin,
-    Utensils,
+    UtensilsCrossed,
     Coffee,
     Trees,
     Landmark,
     Clapperboard,
     ShoppingBag,
     Gem,
+    Flame,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import type { Category } from "@/types/category";
@@ -21,11 +22,13 @@ interface HeroSectionProps {
     onSearchChange: (value: string) => void;
     selectedCategory: number | null;
     onCategoryChange: (categoryId: number | null) => void;
+    showTrending: boolean;
+    onTrendingChange: (value: boolean) => void;
 }
 
 const categoryConfig = {
     Kuliner: {
-        icon: Utensils,
+        icon: UtensilsCrossed,
         label: "Kuliner",
     },
     Cafe: {
@@ -61,6 +64,8 @@ export default function HeroSection({
     onSearchChange,
     selectedCategory,
     onCategoryChange,
+    showTrending,
+    onTrendingChange,
 }: HeroSectionProps) {
     return (
         <div className="mx-auto flex flex-col justify-center mt-12">
@@ -125,17 +130,52 @@ export default function HeroSection({
             </div>
             <div className="mt-8 flex items-center gap-3 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none]">
                 <button
-                    onClick={() => onCategoryChange(null)}
+                    onClick={() => {
+                        onCategoryChange(null);
+                        onTrendingChange(false);
+                    }}
                     className={`
                         inline-flex items-center gap-2 rounded-full
                         border px-5 py-3 transition-all duration-300
-                        ${selectedCategory === null
+                        ${selectedCategory === null && !showTrending
                             ? "border-yellow-300 bg-yellow-300 text-black"
                             : "border-white/10 bg-white/5 text-white hover:border-yellow-300/40 hover:bg-yellow-300/10 cursor-pointer"
                         }
                     `}
                 >
                     Semua
+                </button>
+                <button
+                    onClick={() => {
+                        onTrendingChange(!showTrending);
+                        onCategoryChange(null);
+                    }}
+                    className={`
+                        inline-flex items-center gap-2 rounded-full
+                        border px-5 py-3 transition-all duration-300
+                        ${showTrending
+                            ? "border-red-500 bg-red-500/10 text-white"
+                            : "border-white/10 bg-white/5 text-white hover:border-red-500/40 hover:bg-red-500/10 cursor-pointer"
+                        }
+                    `}
+                >
+                    <div className="relative size-4">
+                        <Flame className="absolute inset-0 size-4" />
+
+                        <Flame
+                            className={`
+                                absolute inset-0 size-4
+                                fill-red-500 text-red-500
+                                transition-[clip-path] duration-500 ease-out
+                                ${showTrending
+                                    ? "[clip-path:inset(0_0_0_0)]"
+                                    : "[clip-path:inset(100%_0_0_0)]"
+                                }
+                            `}
+                        />
+                    </div>
+
+                    Trending
                 </button>
 
                 {categories.map((category) => {
@@ -146,7 +186,10 @@ export default function HeroSection({
                     return (
                         <button
                             key={category.id}
-                            onClick={() => onCategoryChange(category.id)}
+                            onClick={() => {
+                                onCategoryChange(category.id);
+                                onTrendingChange(false);
+                            }}
                             className={`
                                 inline-flex items-center gap-2 rounded-full whitespace-nowrap
                                 border px-5 py-3 transition-all duration-300

@@ -1,5 +1,5 @@
 import { Link } from "@inertiajs/react";
-import { MapPin, Search, Menu, X } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { home, about, explore } from "@/routes";
 
@@ -79,7 +79,21 @@ export default function Navbar() {
                         href={home().url}
                         className="relative flex flex-row justify-center items-center gap-2 group transition-all duration-300 hover:drop-shadow-[0_0_20px_rgba(252,211,77,0.25)]"
                     >
-                        <MapPin
+                        <img
+                            src="karaventure-logo-crop.png"
+                            alt="Karaventure Logo"
+                            className="
+                                pt-0.9 md:pt-0.7 w-6 md:w-9 h-6 md:h-9
+                                transition-all duration-500
+                                ease-out aspect-square
+                                object-contain
+                                group-hover:text-amber-300
+                                group-hover:scale-125
+                                group-hover:-rotate-12
+                                group-hover:-translate-y-0.5
+                            "
+                        />
+                        {/* <MapPin
                             className="
                                 pt-0.9 md:pt-0.7 w-6 md:w-7 h-6 md:h-7
                                 transition-all duration-500
@@ -89,7 +103,7 @@ export default function Navbar() {
                                 group-hover:-rotate-12
                                 group-hover:-translate-y-0.5
                             "
-                        />
+                        /> */}
                         <span className="font-medium text-xl md:text-2xl transition-all duration-500 ease-out group-hover:tracking-wide group-hover:-translate-y-px">
                             Karaven<span className="text-amber-300 transition-all duration-500 group-hover:text-amber-200 group-hover:drop-shadow-[0_0_12px_rgba(252,211,77,0.8)]">ture</span>
                         </span>

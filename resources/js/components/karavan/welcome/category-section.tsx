@@ -1,31 +1,52 @@
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import type { LucideIcon } from 'lucide-react';
 import {
     Coffee,
     UtensilsCrossed,
     Trees,
     Landmark,
-    Ticket,
+    Clapperboard,
     ShoppingBag,
     Gem,
     Compass,
 } from 'lucide-react';
-import type { Category } from "@/types/category"
+import { explore } from '@/routes';
+import type { Category } from "@/types/category";
 
 interface Props {
     categories: Category[];
 }
 
-const CATEGORY_ICONS: Record<string, LucideIcon> = {
-    Kuliner: UtensilsCrossed,
-    Cafe: Coffee,
-    Alam: Trees,
-    Sejarah: Landmark,
-    Hiburan: Ticket,
-    Belanja: ShoppingBag,
-    'Hidden-Gems': Gem,
-};
+const categoryConfig = {
+    Kuliner: {
+        icon: UtensilsCrossed,
+        label: "Kuliner",
+    },
+    Cafe: {
+        icon: Coffee,
+        label: "Cafe",
+    },
+    Alam: {
+        icon: Trees,
+        label: "Alam",
+    },
+    Sejarah: {
+        icon: Landmark,
+        label: "Sejarah",
+    },
+    Hiburan: {
+        icon: Clapperboard,
+        label: "Hiburan",
+    },
+    Belanja: {
+        icon: ShoppingBag,
+        label: "Belanja",
+    },
+    "Hidden-Gems": {
+        icon: Gem,
+        label: "Hidden Gems",
+    },
+} as const;
 
 export default function CategorySection({
     categories,
@@ -47,8 +68,10 @@ export default function CategorySection({
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-                {categories.map((cat, i) => {
-                    const Icon = CATEGORY_ICONS[cat.name] ?? Compass;
+                {categories.map((cat) => {
+                    const config = categoryConfig[cat.name as keyof typeof categoryConfig] ?? Compass;
+                    const Icon = config?.icon;
+                    const label = config?.label ?? cat.name;
 
                     return (
                         <motion.div
@@ -56,12 +79,11 @@ export default function CategorySection({
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: i * 0.06 }}
                             whileHover={{ y: -4 }}
                         >
                             <Link
-                                href='#'
-                                data={{ category: cat.name }}
+                                href={explore()}
+                                data={{ category: cat.id }}
                                 className="group block bg-black/80 rounded-2xl border border-amber-300/20 p-5 text-center hover:shadow-glow transition-all"
                             >
                                 <div className="relative mx-auto w-12 h-12 mb-3">
@@ -72,7 +94,7 @@ export default function CategorySection({
                                 </div>
 
                                 <p className="font-semibold text-sm">
-                                    {cat.name}
+                                    {label}
                                 </p>
                             </Link>
                         </motion.div>

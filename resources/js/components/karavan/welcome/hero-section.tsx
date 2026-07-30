@@ -62,6 +62,7 @@ export default function HeroSection() {
                     </Link>
                     <Link
                         href={explore()}
+                        data={{ trending: true }}
                         className="
                             flex items-center justify-center gap-2
                             text-base md:text-lg

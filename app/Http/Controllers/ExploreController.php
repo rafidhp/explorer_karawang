@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 class ExploreController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         $places = Place::with([
             'category',
             'placeImages',
@@ -23,6 +23,8 @@ class ExploreController extends Controller
         return Inertia::render('explore', [
             'places' => $places,
             'categories' => $categories,
+            'selectedCategory' => $request->integer('category') ?: null,
+            'showTrending' => $request->boolean('trending'),
         ]);
     }
 }
