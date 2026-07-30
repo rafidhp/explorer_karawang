@@ -4,10 +4,12 @@ import type { Place } from "@/types/place";
 
 interface PlaceIndexProps {
     place: Place;
+    relatedPlaces: Place[];
 }
 
 export default function PlaceIndex({
     place,
+    relatedPlaces,
 }: PlaceIndexProps) {
     return (
         <>
@@ -18,7 +20,10 @@ export default function PlaceIndex({
                     rel="stylesheet"
                 />
             </Head>
-            <DetailIndex place={place} />
+            <DetailIndex
+                place={place}
+                relatedPlaces={relatedPlaces}
+            />
         </>
     )
 }

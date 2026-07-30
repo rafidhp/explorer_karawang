@@ -11,43 +11,57 @@ import {
     Gem,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import type { Category } from "@/types/category";
+import type { Place } from "@/types/place";
 
-const categories = [
-    {
-        name: "Semua",
-        active: true,
-    },
-    {
-        name: "Kuliner",
+interface HeroSectionProps {
+    categories: Category[];
+    places: Place[];
+    search: string;
+    onSearchChange: (value: string) => void;
+    selectedCategory: number | null;
+    onCategoryChange: (categoryId: number | null) => void;
+}
+
+const categoryConfig = {
+    Kuliner: {
         icon: Utensils,
+        label: "Kuliner",
     },
-    {
-        name: "Cafe",
+    Cafe: {
         icon: Coffee,
+        label: "Cafe",
     },
-    {
-        name: "Alam",
+    Alam: {
         icon: Trees,
+        label: "Alam",
     },
-    {
-        name: "Sejarah",
+    Sejarah: {
         icon: Landmark,
+        label: "Sejarah",
     },
-    {
-        name: "Hiburan",
+    Hiburan: {
         icon: Clapperboard,
+        label: "Hiburan",
     },
-    {
-        name: "Belanja",
+    Belanja: {
         icon: ShoppingBag,
+        label: "Belanja",
     },
-    {
-        name: "Hidden Gems",
+    "Hidden-Gems": {
         icon: Gem,
+        label: "Hidden Gems",
     },
-];
+} as const;
 
-export default function HeroSection() {
+export default function HeroSection({
+    categories,
+    places,
+    search,
+    onSearchChange,
+    selectedCategory,
+    onCategoryChange,
+}: HeroSectionProps) {
     return (
         <div className="mx-auto flex flex-col justify-center mt-12">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-yellow-300/20 bg-yellow-300/10 px-4 py-2 text-sm font-medium text-yellow-300 w-fit">
@@ -78,13 +92,13 @@ export default function HeroSection() {
                     <div className="relative flex-1">
                         <Search className="absolute left-5 top-1/2 size-5 -translate-y-1/2 text-zinc-500" />
                         <Input
+                            value={search}
+                            onChange={(e) => onSearchChange(e.target.value)}
                             placeholder="Cari sate maranggi, cafe, curug..."
                             className="
-                                h-10
-                                border-0
+                                h-10 border-0
                                 bg-transparent
-                                pl-14
-                                text-xl
+                                pl-14 text-xl
                                 shadow-none
                                 placeholder:text-zinc-500
                                 focus-visible:ring-0
@@ -109,33 +123,47 @@ export default function HeroSection() {
                     </button>
                 </div>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex items-center gap-3 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none]">
+                <button
+                    onClick={() => onCategoryChange(null)}
+                    className={`
+                        inline-flex items-center gap-2 rounded-full
+                        border px-5 py-3 transition-all duration-300
+                        ${selectedCategory === null
+                            ? "border-yellow-300 bg-yellow-300 text-black"
+                            : "border-white/10 bg-white/5 text-white hover:border-yellow-300/40 hover:bg-yellow-300/10 cursor-pointer"
+                        }
+                    `}
+                >
+                    Semua
+                </button>
+
                 {categories.map((category) => {
-                    const Icon = category.icon;
+                    const config = categoryConfig[category.name as keyof typeof categoryConfig];
+                    const Icon = config?.icon;
+                    const label = config?.label ?? category.name;
 
                     return (
                         <button
-                            key={category.name}
+                            key={category.id}
+                            onClick={() => onCategoryChange(category.id)}
                             className={`
-                                inline-flex items-center gap-2 rounded-full
-                                border px-5 py-3
-                                transition-all duration-300
-                                ${category.active
+                                inline-flex items-center gap-2 rounded-full whitespace-nowrap
+                                border px-5 py-3 transition-all duration-300
+                                ${selectedCategory === category.id
                                     ? "border-yellow-300 bg-yellow-300 text-black"
                                     : "border-white/10 bg-white/5 text-white hover:border-yellow-300/40 hover:bg-yellow-300/10 cursor-pointer"
                                 }
                             `}
                         >
-                            {Icon && (
-                                <Icon className="size-4" />
-                            )}
-                            {category.name}
+                            {Icon && <Icon className="size-4" />}
+                            {label}
                         </button>
                     );
                 })}
             </div>
             <p className="mt-8 text-sm text-zinc-400">
-                12 tempat ditemukan • 257 ms
+                {places.length} tempat ditemukan
             </p>
         </div>
     )

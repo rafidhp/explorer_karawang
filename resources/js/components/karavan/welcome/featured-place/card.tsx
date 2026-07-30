@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react";
-import { Star, ChevronRight, Gem } from "lucide-react";
+import { Star, ChevronRight, Gem, Flame } from "lucide-react";
 import { place as placeDetail } from "@/routes";
 import type { Place } from "@/types/place";
 
@@ -35,16 +35,24 @@ function HeroCard({ place }: CardProps) {
             />
             <div className="p-4 space-y-5 mb-12">
                 <div className="flex justify-between items-center">
-                    {isHiddenGem ? (
-                        <span className="bg-yellow-300 text-black py-1 px-4 text-xs rounded-full flex items-center justify-center gap-1">
-                            <Gem className="size-4 text-blue-600 fill-blue-400" />
-                            {place.category.name}
-                        </span>
-                    ) : (
-                        <span className="bg-muted-foreground/30 px-4 py-1 text-xs text-white rounded-full">
-                            {place.category.name}
-                        </span>
-                    )}
+                    <div className="flex items-center gap-2">
+                        {isHiddenGem ? (
+                            <span className="bg-yellow-300 text-black py-1 px-4 text-xs rounded-full flex items-center justify-center gap-1">
+                                <Gem className="size-4 text-blue-600 fill-blue-400" />
+                                {place.category.name}
+                            </span>
+                        ) : (
+                            <span className="bg-muted-foreground/30 px-4 py-1 text-xs text-white rounded-full">
+                                {place.category.name}
+                            </span>
+                        )}
+                        {place.is_trending && (
+                            <div className="px-4 py-1 bg-black/70 border border-red-500 rounded-full text-xs flex items-center justify-center gap-1">
+                                <Flame className="size-4 fill-red-500 text-red-500" />
+                                <span>Trending</span>
+                            </div>
+                        )}
+                    </div>
                     <span className="flex items-center justify-center gap-1">
                         <Star className="size-4.5 fill-yellow-400 text-yellow-500 pb-0.5" />
                         {place.avg_rating}
@@ -99,16 +107,24 @@ function SmallCard({
             />
             <div className={`p-4 space-y-3 mb-12 ${isExplorePage ? 'xl:mb-12' : 'xl:mb-0'}`}>
                 <div className="flex justify-between items-center">
-                    {isHiddenGem ? (
-                        <span className="bg-yellow-300 text-black py-1 px-4 text-xs rounded-full flex items-center justify-center gap-1">
-                            <Gem className="size-4 text-blue-600 fill-blue-400" />
-                            {place.category.name}
-                        </span>
-                    ) : (
-                        <span className="bg-muted-foreground/30 px-4 py-1 text-xs text-white rounded-full">
-                            {place.category.name}
-                        </span>
-                    )}
+                    <div className="flex items-center gap-2">
+                        {isHiddenGem ? (
+                            <span className="bg-yellow-300 text-black py-1 px-4 text-xs rounded-full flex items-center justify-center gap-1">
+                                <Gem className="size-4 text-blue-600 fill-blue-400" />
+                                {place.category.name}
+                            </span>
+                        ) : (
+                            <span className="bg-muted-foreground/30 px-4 py-1 text-xs text-white rounded-full">
+                                {place.category.name}
+                            </span>
+                        )}
+                        {place.is_trending && (
+                            <div className="px-4 py-1 bg-black/70 border border-red-500 rounded-full text-xs flex items-center justify-center gap-1">
+                                <Flame className="size-4 fill-red-500 text-red-500" />
+                                <span>Trending</span>
+                            </div>
+                        )}
+                    </div>
                     <span className="flex items-center justify-center gap-1">
                         <Star className="size-4.5 fill-yellow-400 text-yellow-500 pb-0.5" />
                         {place.avg_rating}

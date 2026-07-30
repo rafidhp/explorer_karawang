@@ -1,3 +1,4 @@
+import { router } from "@inertiajs/react";
 import {
     Flame,
     Star,
@@ -6,16 +7,19 @@ import {
     BadgeCheck,
     Gem,
 } from "lucide-react";
+import { place as placeRoute } from "@/routes";
 import type { Place } from "@/types/place";
 import Footer from "../footer";
 import BackButton from "./back-button";
 
 interface DetailIndexProps {
     place: Place;
+    relatedPlaces: Place[];
 }
 
 export default function DetailIndex({
     place,
+    relatedPlaces,
 }: DetailIndexProps) {
     const heroImage = place.place_images[0]?.image ?? "/images/placeholder.jpg";
 
@@ -74,8 +78,8 @@ export default function DetailIndex({
                 </div>
             </div>
 
-            {/* left section */}
             <div className="flex flex-col lg:flex-row px-6 md:px-10 lg:px-17.5 gap-8 lg:gap-16">
+                {/* left section */}
                 <div className="flex flex-col flex-3">
                     <div
                         className="
@@ -92,7 +96,7 @@ export default function DetailIndex({
                         {place.tags.length != 0 && (
                             <div className="flex items-center gap-4 mt-8">
                                 {place.tags.map((tag) => (
-                                    <div className="rounded-full px-4 py-1 bg-gray-900 border border-white/20 cursor-default">
+                                    <div className="rounded-full px-4 py-1 bg-gray-900 border border-white/20 cursor-default whitespace-nowrap">
                                         {tag}
                                     </div>
                                 ))}
@@ -218,6 +222,46 @@ export default function DetailIndex({
                             <span className="text-sm">{place.district}</span>
                         </div>
                     </div>
+                    {relatedPlaces.length != 0 && 
+                        relatedPlaces.map((item) => (
+                            <div
+                                onClick={() => router.visit(placeRoute(item.id))}
+                                className="
+                                    group box-content relative
+                                    space-y-4 border border-amber-300/20
+                                    rounded-3xl bg-black/50 p-4
+                                    hover:-translate-y-1 cursor-pointer
+                                    transition-all duration-300
+                                    hover:border-yellow-400/50
+                                    hover:shadow-[0_0_30px_rgba(250,204,21,0.08)]
+                                "
+                            >
+                                <div className="flex items-center gap-4">
+                                    <img
+                                        src={item.place_images[0].image}
+                                        alt={item.name}
+                                        className="w-32 h-32 aspect-square object-cover rounded-xl"
+                                    />
+                                    <div className="flex flex-col gap-2">
+                                        <h2 className="text-base line-clamp-1">
+                                            {item.name}
+                                        </h2>
+                                        <p className="text-xs line-clamp-2 text-muted-foreground">
+                                            {item.tagline}
+                                        </p>
+                                        <div className="flex items-center gap-1 text-xs">
+                                            <Star className="size-4 pb-0.5 text-yellow-400 fill-yellow-400" />
+                                            {item.avg_rating}
+                                        </div>
+                                        <div className="flex items-center gap-1 text-xs">
+                                            <MapPin className="size-4 pb-0.5" />
+                                            {item.district}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
             <Footer />

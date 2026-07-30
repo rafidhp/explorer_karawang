@@ -16,8 +16,19 @@ class PlaceController extends Controller
             'robloxImages',
         ]);
         
+        $relatedPlaces = Place::with([
+            'category',
+            'placeImages',
+            'robloxImages',
+        ])
+        ->whereKeyNot($place->id)
+        ->inRandomOrder()
+        ->take(3)
+        ->get();
+        
         return Inertia::render('place/place-index', [
             'place' => $place,
+            'relatedPlaces' => $relatedPlaces,
         ]);
     }
 }

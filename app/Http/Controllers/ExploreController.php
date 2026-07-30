@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Place\Place;
 
 use Illuminate\Http\Request;
@@ -17,9 +18,11 @@ class ExploreController extends Controller
         ])
         ->latest()
         ->get();
+        $categories = Category::all();
 
         return Inertia::render('explore', [
             'places' => $places,
+            'categories' => $categories,
         ]);
     }
 }

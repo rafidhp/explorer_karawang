@@ -19,10 +19,10 @@ export default function MessageSection() {
     const bottomRef = useRef<HTMLDivElement | null>(null);
 
     const suggestions = [
-        "Tempat buat ngerjain tugas yang enak?",
+        "Cafe yang enak buat nugas?",
         "Apa itu Karaventure?",
-        // "Bagaimana cara menambahkan produk?",
-        // "Apa itu Komunitas yang ada di Khaslana?",
+        "Tempat makan keluarga?",
+        "Hidden Gems di karawang?",
         // "Bagaimana cara mengaktifkan status mangkal?",
         // "Bagaimana cara mengunggah foto toko?",
     ];
