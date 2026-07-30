@@ -10,6 +10,7 @@ interface ExploreIndexProps {
     categories: Category[];
     selectedCategory: number | null;
     showTrending: boolean;
+    query: string;
 }
 
 export default function ExploreIndex({
@@ -17,8 +18,9 @@ export default function ExploreIndex({
     categories,
     selectedCategory: initialSelectedCategory,
     showTrending: initialTrending,
+    query,
 }: ExploreIndexProps) {
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState(query);
     const [selectedCategory, setSelectedCategory] = useState<number | null>(
         initialSelectedCategory
     );

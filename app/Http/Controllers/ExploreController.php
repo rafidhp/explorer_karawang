@@ -25,6 +25,7 @@ class ExploreController extends Controller
             'categories' => $categories,
             'selectedCategory' => $request->integer('category') ?: null,
             'showTrending' => $request->boolean('trending'),
+            'query' => $request->string('query') ?: '',
         ]);
     }
 }

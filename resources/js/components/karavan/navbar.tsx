@@ -1,4 +1,5 @@
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Search, Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { home, about, explore } from "@/routes";
@@ -7,6 +8,8 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [keyword, setKeyword] = useState("");
     const menus = [
         {
             name: "Beranda", href: home().url,
@@ -145,48 +148,117 @@ export default function Navbar() {
                                     </Link>
                                 </li>
                             ))}
-                            <li className="
+                            <li
+                                className={`
                                     group
-                                    hover:cursor-pointer
-                                    flex items-center gap-2
-                                    border border-white/20
+                                    flex items-center
                                     rounded-full
-                                    ps-4
+                                    border border-white/20
                                     bg-white/3
                                     backdrop-blur-[14px]
-                                    transition-all duration-300
+                                    transition-all duration-300 ease-in-out
+                                    ${searchOpen
+                                        ? "w-72 pe-3"
+                                        : "w-28 ps-4 pe-0 cursor-pointer"
+                                    }
                                     hover:border-amber-300/60
                                     hover:bg-amber-300/10
                                     hover:shadow-[0_0_25px_rgba(252,211,77,0.15)]
-                                "
+                                `}
                             >
-                                <span
-                                    className="
-                                        text-sm
-                                        transition-all duration-300
-                                        group-hover:text-amber-300
-                                    "
-                                >
-                                    Search
-                                </span>
-                                <Search
-                                    className="
-                                        h-9 w-9
-                                        rounded-full
-                                        p-1.5
-
-                                        border border-white/20
-                                        bg-white/8
-                                        backdrop-blur-[14px]
-
-                                        transition-all duration-300
-
-                                        group-hover:text-amber-300
-                                        group-hover:border-amber-300/60
-                                        group-hover:bg-amber-300/15
-                                        group-hover:rotate-75
-                                    "
-                                />
+                                {!searchOpen && (
+                                    <div
+                                        onClick={() => setSearchOpen(true)}
+                                        className="flex items-center justify-between w-full cursor-pointer"
+                                    >
+                                        <span
+                                            className="
+                                                text-sm
+                                                transition-colors
+                                                group-hover:text-amber-300
+                                            "
+                                        >
+                                            Search
+                                        </span>
+                                        <button>
+                                            <Search
+                                                className="
+                                                    h-9 w-9
+                                                    rounded-full
+                                                    p-1.5 cursor-pointer
+                                                    border border-white/20
+                                                    bg-white/8
+                                                    transition-all duration-300
+                                                    group-hover:text-amber-300
+                                                    group-hover:rotate-75
+                                                "
+                                            />
+                                        </button>
+                                    </div>
+                                )}
+                                <AnimatePresence>
+                                    {searchOpen && (
+                                        <motion.div
+                                            initial={{
+                                                opacity: 0,
+                                                x: 15,
+                                            }}
+                                            animate={{
+                                                opacity: 1,
+                                                x: 0,
+                                            }}
+                                            exit={{
+                                                opacity: 0,
+                                                x: 15,
+                                            }}
+                                            transition={{
+                                                duration: .2,
+                                            }}
+                                            className="flex flex-1 items-center gap-2"
+                                        >
+                                            <Search
+                                                className="
+                                                    h-9 w-9
+                                                    rounded-full
+                                                    p-1.5 cursor-pointer
+                                                    border border-white/20
+                                                    bg-white/8
+                                                    transition-all duration-300
+                                                    group-hover:text-amber-300
+                                                    group-hover:rotate-75
+                                                "
+                                            />
+                                            <input
+                                                autoFocus
+                                                value={keyword}
+                                                onKeyDown={(e) => {
+                                                    if (e.key === "Enter") {
+                                                        router.get(explore(),
+                                                            {query: keyword},
+                                                            {preserveScroll: true}
+                                                        );
+                                                    }
+                                                }}
+                                                onChange={(e) =>
+                                                    setKeyword(e.target.value)
+                                                }
+                                                onBlur={() => {
+                                                    if (!keyword) {
+                                                        setSearchOpen(false)
+                                                    }
+                                                }}
+                                                className="
+                                                    flex-1
+                                                    bg-transparent
+                                                    outline-none
+                                                    text-sm
+                                                    placeholder:text-zinc-500
+                                                "
+                                                placeholder="Cari..."
+                                            />
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </li>
                         </ul>
                     </div>

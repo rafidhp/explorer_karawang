@@ -9,6 +9,7 @@ interface ExploreProps {
     categories: Category[];
     selectedCategory: number | null;
     showTrending: boolean;
+    query: string;
 }
 
 export default function About({
@@ -16,6 +17,7 @@ export default function About({
     categories,
     selectedCategory,
     showTrending,
+    query
 }: ExploreProps) {
     return (
         <UserLayout>
@@ -31,6 +33,7 @@ export default function About({
                 categories={categories}
                 selectedCategory={selectedCategory}
                 showTrending={showTrending}
+                query={query}
             />
         </UserLayout>
     )
