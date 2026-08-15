@@ -18,6 +18,65 @@ class PlaceSeeder extends Seeder
     public function run(): void
     {
         $image = 'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/test.jpg';
+        $images = [
+            'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/curug-cigentis.jpeg',
+            'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/candi-batujaya.jpeg',
+            'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/pantai-tanjung-baru.jpeg',
+            'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/sate-maranggi-pa-asep.jpeg',
+            'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/kopi-kulo.jpeg',
+            'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/festive-walk-galuh-mas.jpeg',
+            'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/resinda-park-mall.jpeg',
+            'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/kampung-budaya-baru.jpeg',
+        ];
+
+        $galleryImages = [
+            [
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/curug-cigentis-2.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/curug-cigentis-3.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/curug-cigentis-4.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/curug-cigentis-5.jpeg',
+            ],
+            [
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/candi-batujaya-2.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/candi-batujaya-3.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/candi-batujaya-4.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/candi-batujaya-5.jpeg',
+            ],
+            [
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/pantai-tanjung-baru-2.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/pantai-tanjung-baru-3.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/pantai-tanjung-baru-4.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/pantai-tanjung-baru-5.jpeg',
+            ],
+            [
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/sate-maranggi-pa-asep-2.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/sate-maranggi-pa-asep-3.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/sate-maranggi-pa-asep-4.jpeg',
+            ],
+            [
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/kopi-kulo-2.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/kopi-kulo-3.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/kopi-kulo-4.jpeg',
+            ],
+            [
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/festive-walk-galuh-mas-2.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/festive-walk-galuh-mas-3.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/festive-walk-galuh-mas-4.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/festive-walk-galuh-mas-5.jpeg',
+            ],
+            [
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/resinda-park-mall-2.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/resinda-park-mall-3.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/resinda-park-mall-4.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/resinda-park-mall-5.jpeg',
+            ],
+            [
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/kampung-budaya-baru-2.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/kampung-budaya-baru-3.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/kampung-budaya-baru-4.jpeg',
+                'https://cdn.jsdelivr.net/gh/rafidhp/explorer_karawang-assets@main/kampung-budaya-baru-5.jpeg',
+            ],
+        ];
 
         $places = [
             [
@@ -26,7 +85,7 @@ class PlaceSeeder extends Seeder
                 'tagline' => 'Air terjun tersembunyi di kaki Gunung Sanggabuana',
                 'description' => 'Curug Cigentis adalah surga tersembunyi di Karawang Selatan. Air terjun setinggi sekitar 50 meter ini dikelilingi hutan rimbun dan udara sejuk khas pegunungan.',
                 'tags' => ['air terjun', 'hiking', 'instagramable', 'sejuk'],
-                'avg_rating' => 4.7,
+                'avg_rating' => 4.4,
                 'address' => 'Desa Mekarbuana, Tegalwaru, Karawang',
                 'district' => 'Tegalwaru',
                 'hours' => '07.00 - 17.00',
@@ -58,7 +117,7 @@ class PlaceSeeder extends Seeder
                 'tagline' => 'Sunset paling juara di pesisir utara Karawang',
                 'description' => 'Pantai favorit untuk menikmati sunset dengan suasana santai bersama keluarga maupun teman.',
                 'tags' => ['pantai', 'sunset', 'santai', 'keluarga'],
-                'avg_rating' => 4.3,
+                'avg_rating' => 3.5,
                 'address' => 'Cilamaya Wetan, Karawang',
                 'district' => 'Cilamaya',
                 'hours' => '24 jam',
@@ -86,7 +145,7 @@ class PlaceSeeder extends Seeder
             ],
             [
                 'category' => 'Cafe',
-                'name' => 'Kopi Kulon',
+                'name' => 'Kopi Kulo',
                 'tagline' => 'Specialty coffee dengan vibe industrial-tropical',
                 'description' => 'Cafe favorit untuk work from cafe dengan pilihan specialty coffee dari berbagai daerah Indonesia.',
                 'tags' => ['specialty coffee', 'wfc', 'aesthetic', 'wifi'],
@@ -150,7 +209,7 @@ class PlaceSeeder extends Seeder
             ],
         ];
 
-        foreach ($places as $data) {
+        foreach ($places as $index => $data) {
             $category = Category::where('name', $data['category'])->first();
 
             $place = Place::create([
@@ -172,14 +231,17 @@ class PlaceSeeder extends Seeder
 
             PlaceImage::create([
                 'place_id' => $place->id,
-                'image' => $image,
+                'image' => $images[$place->id - 1],
             ]);
 
             // dummy gallery tambahan
-            PlaceImage::create([
-                'place_id' => $place->id,
-                'image' => $image,
-            ]);
+            foreach ($galleryImages[$index] ?? [] as $galleryImage) {
+                PlaceImage::create([
+                    'place_id' => $place->id,
+                    'image' => $galleryImage,
+                ]);
+            }
+
 
             RobloxImage::create([
                 'place_id' => $place->id,
